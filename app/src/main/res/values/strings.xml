@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">ShahClick</string>
+        <string name="crystals_count">"Crystals: %1$d"</string>
+        <string name="upgrades">Upgrades</string>
+        <string name="buy">Buy</string>
+        <string name="upgrade_cost">"Cost: %1$d"</string>
+        <string name="upgrade_level">"Level: %1$d"</string>
+        <string name="daily_task_title">Daily Task</string>
+        <string name="daily_task_description">Task Description</string>
+        <string name="ok">OK</string>
+        <string name="rebus_title">Rebus</string>
+        <string name="enter_answer">Enter answer</string>
+        <string name="check">Check</string>
+        <string name="cancel">Cancel</string>
+        <string name="rebus_correct_toast">Correct! +1000 crystals</string>
+        <string name="rebus_incorrect_toast">Incorrect, try again!</string>
+        <string name="daily_task_completed_toast">Daily task completed! Crystals per click increased!</string>
+        <string name="rebus_already_solved">This rebus has already been solved today!</string>
+        <string name="record">"Record: %1$d"</string>
+        <string name="crystals_per_click">"Crystals per click: %1$d"</string>
+        <string name="upgrade_info">"+%1$d per click"</string>
+        <string name="daily_task_template">"Daily task: %1$s"</string>
+        <string name="daily_task_completed">"Daily task completed!"</string>
+
+        <string-array name="daily_tasks">
+            <item>Click the crystal 50 times.</item>
+            <item>Click the crystal 100 times.</item>
+            <item>Click the crystal 200 times.</item>
+            <item>Collect 500 crystals.</item>
+            <item>Collect 1000 crystals.</item>
+            <item>Collect 2000 crystals.</item>
+            <item>Buy 3 upgrades.</item>
+            <item>Buy 5 upgrades</item>
+            <item>Reach 5000 crystals per click.</item>
+            <item>Reach 50000 crystals per click.</item>
+        </string-array>
+
+        <string-array name="rebus_answers">
+            <item>behemoth</item>
+            <item>муха</item>
+            <item>каша</item>
+            <item>стул</item>
+            <item>незабудка</item>
+        </string-array>
+    </resources>

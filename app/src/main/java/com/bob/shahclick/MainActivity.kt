@@ -133,12 +133,12 @@ class MainActivity : AppCompatActivity(), RebusDialogListener {
     }
 
     private fun showDailyTaskDialog() {
-        val dialog = DailyTaskDialogFragment()
+        val dialog = DailyTaskDialogFragment.newInstance(gameData)
         dialog.show(supportFragmentManager, "DailyTaskDialogFragment")
     }
 
     private fun showRebusDialog() {
-        val dialog = RebusDialogFragment()
+        val dialog = RebusDialogFragment.newInstance(gameData)
         dialog.show(supportFragmentManager, "RebusDialogFragment")
     }
 

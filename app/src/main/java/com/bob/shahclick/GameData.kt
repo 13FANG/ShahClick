@@ -48,7 +48,8 @@ class GameData(context: Context) {
         // Для 2-й версии:
         currentDailyTask = sharedPreferences.getInt("currentDailyTask", 0) // Загружаем currentDailyTask, по умолчанию 0
         if (currentDailyTask == -1) currentDailyTask = 0 //Если все же currentDailyTask оказался равен -1, то присваиваем ему 0
-        currentRebus = sharedPreferences.getInt("currentRebus", -1)
+        currentRebus = sharedPreferences.getInt("currentRebus", 0) // Загружаем currentRebus, по умолчанию 0
+        if (currentRebus == -1) currentRebus = 0 //Если все же currentRebus оказался равен -1, то присваиваем ему 0
         isDailyTaskCompleted = sharedPreferences.getBoolean("isDailyTaskCompleted", false)
         isRebusCompleted = sharedPreferences.getBoolean("isRebusCompleted", false)
         lastDailyReset = sharedPreferences.getLong("lastDailyReset", 0)
@@ -150,9 +151,11 @@ class GameData(context: Context) {
     fun completeRebus() {
         Log.d("GameData", "completeRebus called")
         crystals += 1000
+        Log.d("GameData", "completeRebus: crystals increased to $crystals")
         isRebusCompleted = true
-        saveData() // Сохраняем изменения
-        Log.d("GameData", "completeRebus: isRebusCompleted set to true and data saved")
+        Log.d("GameData", "completeRebus: isRebusCompleted set to true")
+        saveData()
+        Log.d("GameData", "completeRebus: data saved")
     }
 
     fun isNewDay(): Boolean {

@@ -12,8 +12,17 @@ import androidx.fragment.app.DialogFragment
 
 class RebusDialogFragment : DialogFragment() {
 
-    private lateinit var gameData: GameData
-    private var listener: RebusDialogListener? = null
+    lateinit var gameData: GameData // Убираем private
+    var listener: RebusDialogListener? = null
+
+    // Добавляем companion object
+    companion object {
+        fun newInstance(gameData: GameData): RebusDialogFragment {
+            val fragment = RebusDialogFragment()
+            fragment.gameData = gameData
+            return fragment
+        }
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -42,24 +51,25 @@ class RebusDialogFragment : DialogFragment() {
             // Обработка ошибки: изображение не найдено
             Log.e("RebusDialogFragment", "Rebus image not found for currentRebus: $currentRebus")
             // Можно установить изображение по умолчанию или показать сообщение об ошибке
-            rebusImageView.setImageResource(R.drawable.rebus1) //Или другое изображение
+            rebusImageView.setImageResource(R.drawable.crystal_small) //Или другое изображение
         }
 
-        return activity?.let {
-            val builder = AlertDialog.Builder(it)
+        return activity?.let { activity ->
+            val builder = AlertDialog.Builder(activity)
             builder.setView(view)
                 .setTitle(R.string.rebus_title)
                 .setPositiveButton(R.string.check) { dialog, id ->
-                    Log.d("RebusDialogFragment", "Check button clicked") // Добавлен лог
+                    Log.d("RebusDialogFragment", "Check button clicked")
                     val userAnswer = answerEditText.text.toString().trim().lowercase()
 
-                    // Проверка currentRebus на валидность
                     val rebusAnswers = resources.getStringArray(R.array.rebus_answers)
                     Log.d("RebusDialogFragment", "currentRebus: $currentRebus, userAnswer: $userAnswer, isRebusCompleted: ${gameData.isRebusCompleted()}")
                     if (currentRebus in 0 until rebusAnswers.size) {
                         if (userAnswer == rebusAnswers[currentRebus].lowercase() && !gameData.isRebusCompleted()) {
-                            gameData.completeRebus()
-                            Toast.makeText(context, getString(R.string.rebus_correct_toast), Toast.LENGTH_SHORT).show()
+                            activity.runOnUiThread {
+                                gameData.completeRebus()
+                            }
+                            Toast.makeText(activity, getString(R.string.rebus_correct_toast), Toast.LENGTH_SHORT).show()
 
                             // Сообщаем MainActivity о решении ребуса через интерфейс:
                             if (listener != null) {
@@ -68,9 +78,9 @@ class RebusDialogFragment : DialogFragment() {
                                 Log.e("RebusDialogFragment", "Listener is null!")
                             }
                         } else if (gameData.isRebusCompleted()) {
-                            Toast.makeText(context, getString(R.string.rebus_already_solved), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(activity, getString(R.string.rebus_already_solved), Toast.LENGTH_SHORT).show()
                         } else {
-                            Toast.makeText(context, getString(R.string.rebus_incorrect_toast), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(activity, getString(R.string.rebus_incorrect_toast), Toast.LENGTH_SHORT).show()
                         }
                     } else {
                         Log.e("RebusDialogFragment", "Invalid currentRebus: $currentRebus")

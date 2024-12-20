@@ -9,7 +9,16 @@ import androidx.fragment.app.DialogFragment
 
 class DailyTaskDialogFragment : DialogFragment() {
 
-    private lateinit var gameData: GameData
+    lateinit var gameData: GameData // Убираем private
+
+    // Добавляем companion object
+    companion object {
+        fun newInstance(gameData: GameData): DailyTaskDialogFragment {
+            val fragment = DailyTaskDialogFragment()
+            fragment.gameData = gameData
+            return fragment
+        }
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         gameData = GameData(requireContext())
